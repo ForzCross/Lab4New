@@ -13,6 +13,7 @@ namespace lab4
     /// </summary>
     class AppData
     {
+
         private static AppData instance;
         public static Image image;
 
