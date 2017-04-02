@@ -39,11 +39,11 @@ class ConcreteFactory : AbstractFactory
 }
 abstract class AbstractSimvol
 {
-    public abstract void CreateSimvol();
+    public abstract Button CreateSimvol(Rectangle tmp, string name, string info);
 }
 abstract class AbstractExpSimvol
 {
-    public abstract void CreateExpSimol();
+    public abstract Button CreateExpSimvol(Rectangle tmp, string name, string info);
 }
 class Simvol : AbstractSimvol
 {
@@ -72,7 +72,7 @@ class ExpSimvol : AbstractExpSimvol
     /// <param name="name"></param>
     /// <param name="info"></param>
     /// <returns></returns>
-    public override Button CreateSimvol(Rectangle tmp, string name, string info)
+    public override Button CreateExpSimvol(Rectangle tmp, string name, string info)
     {
         Button bt = new Button();
         position_simvol = tmp;

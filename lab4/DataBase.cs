@@ -21,6 +21,7 @@ namespace lab4
                 SQLiteConnection.CreateFile(dbname);
                 connection = new SQLiteConnection(string.Format("Data Source={0};", dbname));
                 connection.Open();
+               // execWrite("")
 
             }            
         }
@@ -35,6 +36,7 @@ namespace lab4
             SQLiteCommand command = new SQLiteCommand(query, connection);
             return command.ExecuteReader();
         }
+        
         public bool storeImage(Bitmap img)
         {
             byte[] data = bitmapToByteArray(img);
