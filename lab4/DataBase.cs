@@ -8,6 +8,5 @@ namespace lab4
 {
     class DataBase
     {
-
     }
 }
