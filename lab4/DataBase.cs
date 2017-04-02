@@ -6,10 +6,14 @@ using System.Threading.Tasks;
 using System.Data.SQLite;
 using System.IO;
 using System.Drawing;
+using System.Collections;
 
 namespace lab4
 {
-    class ImageDataBase
+    /// <summary>
+    /// Класс для работы с базой данных картинок
+    /// </summary>
+    class ImageDataBase:
     {
         string dbPath;
         SQLiteConnection connection;
@@ -21,7 +25,7 @@ namespace lab4
                 SQLiteConnection.CreateFile(dbname);
                 connection = new SQLiteConnection(string.Format("Data Source={0};", dbname));
                 connection.Open();
-               // execWrite("")
+               // execWrite("ID INT PRIMARY KEY NOT NULL, ")
 
             }            
         }
@@ -31,6 +35,7 @@ namespace lab4
             SQLiteCommand command = new SQLiteCommand(query, connection);
             return command.ExecuteNonQuery();           
         }
+
         SQLiteDataReader execRead(string query)
         {
             SQLiteCommand command = new SQLiteCommand(query, connection);
