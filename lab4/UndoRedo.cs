@@ -24,6 +24,9 @@ class Expert//эксперт вносит название и описание �
         simvol.info_simvol.Add(info);
     }
 }
+/// <summary>
+/// реализация отмены и возврата
+/// </summary>
 class ConcreteCreateData : Command
 {
     Expert expsimvol;
@@ -38,6 +41,9 @@ class ConcreteCreateData : Command
         expsimvol.CreateData(name, info);
     }
 }
+/// <summary>
+/// формирует список комаанд которые были произведены экспертом, в дальнейм для отмены и возврата 
+/// </summary>
 class User
 {
     private List<Command> commands = new List<Command>();

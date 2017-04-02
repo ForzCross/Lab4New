@@ -65,6 +65,13 @@ class ExpSimvol : AbstractExpSimvol
 {
     public Rectangle position_simvol = new Rectangle();
     public List<string> info_simvol = new List<string>();
+    /// <summary>
+    /// вернет кнопку с инфой которую на форме уже надо будет сделать прозрачной и сделать привязку к родительской форме
+    /// </summary>
+    /// <param name="tmp"></param>
+    /// <param name="name"></param>
+    /// <param name="info"></param>
+    /// <returns></returns>
     public override Button CreateSimvol(Rectangle tmp, string name, string info)
     {
         Button bt = new Button();
@@ -73,7 +80,7 @@ class ExpSimvol : AbstractExpSimvol
         info_simvol.Add(info);
         bt.Location = tmp.Location;
         bt.Text = name + " " + info;
-        return bt; //вернет кнопку с инфой которую на форме уже надо будет сделать прозрачной и сделать привязку к родительской форме
+        return bt; 
     }
 
 }
