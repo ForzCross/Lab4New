@@ -15,6 +15,7 @@ namespace lab4
     {
 
         private static AppData instance;
+
         public static Image image;
 
         protected AppData()
