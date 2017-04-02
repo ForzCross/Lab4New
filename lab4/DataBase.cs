@@ -13,11 +13,15 @@ namespace lab4
     /// <summary>
     /// Класс для работы с базой данных картинок
     /// </summary>
-    class ImageDataBase:
+    class ImageDataBase
     {
-        string dbPath;
+        string dbPath;        
         SQLiteConnection connection;
-        public ImageDataBase(string dbname)
+        /// <summary>
+        /// Создаёт подключение к БД
+        /// </summary>
+        /// <param name="dbname">имя БД</param>
+        public ImageDataBase(string dbname = "ImageDB")
         {
             dbPath = dbname;
             if (!File.Exists(dbname))
@@ -25,7 +29,7 @@ namespace lab4
                 SQLiteConnection.CreateFile(dbname);
                 connection = new SQLiteConnection(string.Format("Data Source={0};", dbname));
                 connection.Open();
-               // execWrite("ID INT PRIMARY KEY NOT NULL, ")
+                execWrite("CREATE DATABASEID INT PRIMARY KEY NOT NULL, ")
 
             }            
         }
@@ -49,8 +53,7 @@ namespace lab4
             //execWrite()
             return true;            
         }
-
-        public static byte[] bitmapToByteArray(Bitmap img)
+        static byte[] bitmapToByteArray(Bitmap img)
         {
             ImageConverter converter = new ImageConverter();
             return (byte[])converter.ConvertTo(img, typeof(byte[]));
