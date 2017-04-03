@@ -29,17 +29,28 @@ namespace lab4
                 SQLiteConnection.CreateFile(dbname);
                 connection = new SQLiteConnection(string.Format("Data Source={0};", dbname));
                 connection.Open();
-                execWrite("CREATE DATABASEID INT PRIMARY KEY NOT NULL, ")
-
+                execWrite("CREATE DATABASE ImageDB(id INT PRIMARY KEY NOT NULL, "
+                        + "name TEXT NOT NULL"
+                        + "info TEXT NOT NULL"
+                        + "image BLOB NOT NULL");
             }            
         }
-
+        public void getImageData(int index, AbstractSimvol simvol)
+        {
+            SQLiteDataReader reader = execRead("SELECT * FROM ImageDB WHERE id = " + index);
+            
+        }
+        /// <summary>
+        /// Выполняет запрос не ожидая ответа от бд
+        /// </summary>
+        /// <param name="query">запрос, выполняемый на БД</param>
+        /// <returns>количество затронутых строк</returns>
         int execWrite(string query)
         {
             SQLiteCommand command = new SQLiteCommand(query, connection);
             return command.ExecuteNonQuery();           
         }
-
+        
         SQLiteDataReader execRead(string query)
         {
             SQLiteCommand command = new SQLiteCommand(query, connection);
@@ -57,6 +68,11 @@ namespace lab4
         {
             ImageConverter converter = new ImageConverter();
             return (byte[])converter.ConvertTo(img, typeof(byte[]));
+        }
+        static Bitmap ByteArrayToBitmap(byte[] imgBinary)
+        {
+            ImageConverter converter = new ImageConverter();
+            return (Bitmap)converter.ConvertTo(imgBinary,typeof(Bitmap));
         }
     }
 }
