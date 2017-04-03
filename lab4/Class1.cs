@@ -39,32 +39,49 @@ class ConcreteFactory : AbstractFactory
 }
 abstract class AbstractSimvol
 {
-    public abstract Button CreateSimvol(Rectangle tmp, string name, string info);
+    public abstract void SetInfo(string name, string info,Bitmap bm);
+    public abstract Button CreateSimvol(Rectangle tmp);
 }
 abstract class AbstractExpSimvol
 {
-    public abstract Button CreateExpSimvol(Rectangle tmp, string name, string info);
+    public abstract void SetInfo(string name, string info,Bitmap bm);
+    public abstract Button CreateExpSimvol(Rectangle tmp);
 }
+
+
 class Simvol : AbstractSimvol
 {
-   public Rectangle position_simvol = new Rectangle();
-   public List<string> info_simvol = new List<string>();
-    public override Button CreateSimvol(Rectangle tmp,string name, string info)
+    private Bitmap bmSym;
+    private Rectangle position_simvol = new Rectangle();
+   
+    private string name;
+    private string info;
+
+    public override Button CreateSimvol(Rectangle tmp)
     {
         Button bt = new Button();
         position_simvol = tmp;
-        info_simvol.Add(name);
-        info_simvol.Add(info);
+   
         bt.Location=tmp.Location;
         bt.Text = name+" "+info;
         return bt;
     }
-  
+    public override void SetInfo(string name, string info,Bitmap bm)
+    {
+        bmSym = bm;
+        this.name = name;
+        this.info = info;
+    }
+
+
 }
 class ExpSimvol : AbstractExpSimvol
 {
+    private string name;
+    private string info;
+    private Bitmap bmSym;
     public Rectangle position_simvol = new Rectangle();
-    public List<string> info_simvol = new List<string>();
+
     /// <summary>
     /// вернет кнопку с инфой которую на форме уже надо будет сделать прозрачной и сделать привязку к родительской форме
     /// </summary>
@@ -72,15 +89,21 @@ class ExpSimvol : AbstractExpSimvol
     /// <param name="name"></param>
     /// <param name="info"></param>
     /// <returns></returns>
-    public override Button CreateExpSimvol(Rectangle tmp, string name, string info)
+    public override Button CreateExpSimvol(Rectangle tmp)
     {
         Button bt = new Button();
         position_simvol = tmp;
-        info_simvol.Add(name);
-        info_simvol.Add(info);
+      
         bt.Location = tmp.Location;
         bt.Text = name + " " + info;
         return bt; 
     }
+    public override void SetInfo(string name, string info,Bitmap bm)
+    {
+        this.name = name;
+        this.info = info;
+    }
+
 
 }
+
