@@ -40,11 +40,14 @@ class ConcreteFactory : AbstractFactory
 abstract class AbstractSimvol
 {
     public abstract void SetInfo(string name, string info,Bitmap bm);
+
     public abstract Button CreateSimvol(Rectangle tmp);
 }
 abstract class AbstractExpSimvol
 {
     public abstract void SetInfo(string name, string info,Bitmap bm);
+    public abstract void updateInfo(string name, string info);
+
     public abstract Button CreateExpSimvol(Rectangle tmp);
 }
 
@@ -72,7 +75,7 @@ class Simvol : AbstractSimvol
         this.name = name;
         this.info = info;
     }
-
+    
 
 }
 class ExpSimvol : AbstractExpSimvol
@@ -103,7 +106,11 @@ class ExpSimvol : AbstractExpSimvol
         this.name = name;
         this.info = info;
     }
-
+    public override void updateInfo(string name, string info)
+    {
+        this.name = name;
+        this.info = info;
+    }
 
 }
 

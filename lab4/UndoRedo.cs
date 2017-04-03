@@ -20,8 +20,7 @@ class Expert//эксперт вносит название и описание �
     ExpSimvol simvol = new ExpSimvol();
     public void CreateData(string name,string info)
     {
-        simvol.info_simvol.Add(name);
-        simvol.info_simvol.Add(info);
+        simvol.updateInfo(name, info);
     }
 }
 /// <summary>
