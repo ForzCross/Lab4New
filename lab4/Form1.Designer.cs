@@ -30,8 +30,8 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.expertModeButton = new System.Windows.Forms.Button();
+            this.userModeButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -42,45 +42,50 @@
             this.справкаToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 1, 0, 1);
-            this.menuStrip1.Size = new System.Drawing.Size(498, 24);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 1, 0, 1);
+            this.menuStrip1.Size = new System.Drawing.Size(617, 26);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // справкаToolStripMenuItem
             // 
             this.справкаToolStripMenuItem.Name = "справкаToolStripMenuItem";
-            this.справкаToolStripMenuItem.Size = new System.Drawing.Size(65, 22);
+            this.справкаToolStripMenuItem.Size = new System.Drawing.Size(79, 24);
             this.справкаToolStripMenuItem.Text = "Справка";
             this.справкаToolStripMenuItem.Click += new System.EventHandler(this.справкаToolStripMenuItem_Click);
             // 
-            // button1
+            // expertModeButton
             // 
-            this.button1.Location = new System.Drawing.Point(176, 91);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(120, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Экспертный режим";
-            this.button1.UseVisualStyleBackColor = true;
+            this.expertModeButton.Location = new System.Drawing.Point(235, 112);
+            this.expertModeButton.Margin = new System.Windows.Forms.Padding(4);
+            this.expertModeButton.Name = "expertModeButton";
+            this.expertModeButton.Size = new System.Drawing.Size(160, 28);
+            this.expertModeButton.TabIndex = 1;
+            this.expertModeButton.Text = "Экспертный режим";
+            this.expertModeButton.UseVisualStyleBackColor = true;
+            this.expertModeButton.Click += new System.EventHandler(this.expertModeButton_Click);
             // 
-            // button2
+            // userModeButton
             // 
-            this.button2.Location = new System.Drawing.Point(176, 154);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(120, 43);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Пользовательский режим";
-            this.button2.UseVisualStyleBackColor = true;
+            this.userModeButton.Location = new System.Drawing.Point(235, 190);
+            this.userModeButton.Margin = new System.Windows.Forms.Padding(4);
+            this.userModeButton.Name = "userModeButton";
+            this.userModeButton.Size = new System.Drawing.Size(160, 53);
+            this.userModeButton.TabIndex = 2;
+            this.userModeButton.Text = "Пользовательский режим";
+            this.userModeButton.UseVisualStyleBackColor = true;
+            this.userModeButton.Click += new System.EventHandler(this.userModeButton_Click);
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(498, 275);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(617, 349);
+            this.Controls.Add(this.userModeButton);
+            this.Controls.Add(this.expertModeButton);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Распознавание символов";
             this.menuStrip1.ResumeLayout(false);
@@ -94,8 +99,8 @@
 
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem справкаToolStripMenuItem;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button expertModeButton;
+        private System.Windows.Forms.Button userModeButton;
     }
 }
 

@@ -18,7 +18,10 @@ namespace lab4
 
         public void createExpertWindow()
         {
-
+            
         }
     }
 }
+
+//декоратор при добавления текста к объекту симовла
+//uml

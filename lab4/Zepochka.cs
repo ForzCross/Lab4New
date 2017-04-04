@@ -85,7 +85,7 @@ class ProductOutSimvol : Product
 
     public ProductOutSimvol(Simvol obj) : base()
     {
-        this.name = obj.info_simvol[0];
+        this.name = obj.name;
     }
 }
 
@@ -93,7 +93,7 @@ class ProductoutExpSimvol : Product
 {
     public ProductoutExpSimvol(ExpSimvol obj) : base()
     {
-        this.name = obj.info_simvol[0];
+        this.name = obj.name;
     }
 }
 abstract class Creator

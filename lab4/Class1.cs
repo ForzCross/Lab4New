@@ -18,11 +18,11 @@ namespace lab4
 {
     class Class1
     {
-
+        
     }
 }
 abstract class AbstractFactory
-{
+{   
     public abstract AbstractSimvol CreateSimvol();
     public abstract AbstractExpSimvol CreateExpSimvol();
 }
@@ -57,8 +57,8 @@ class Simvol : AbstractSimvol
     private Bitmap bmSym;
     private Rectangle position_simvol = new Rectangle();
    
-    private string name;
-    private string info;
+    public string name;
+    public string info;
 
     public override Button CreateSimvol(Rectangle tmp)
     {
@@ -80,8 +80,8 @@ class Simvol : AbstractSimvol
 }
 class ExpSimvol : AbstractExpSimvol
 {
-    private string name;
-    private string info;
+    public string name;
+    public string info;
     private Bitmap bmSym;
     public Rectangle position_simvol = new Rectangle();
 

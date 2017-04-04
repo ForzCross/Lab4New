@@ -17,12 +17,14 @@ namespace lab4
     {
         string dbPath;        
         SQLiteConnection connection;
+        ConcreteFactory factory = new ConcreteFactory();
         /// <summary>
         /// Создаёт подключение к БД
         /// </summary>
         /// <param name="dbname">имя БД</param>
         public ImageDataBase(string dbname = "ImageDB")
         {
+           
             dbPath = dbname;
             if (!File.Exists(dbname))
             {
@@ -32,12 +34,14 @@ namespace lab4
                 execWrite("CREATE DATABASE ImageDB(id INT PRIMARY KEY NOT NULL, "
                         + "name TEXT NOT NULL"
                         + "info TEXT NOT NULL"
-                        + "image BLOB NOT NULL");
+                        + "image BLOB NOT NULL)");
             }            
         }
         public void getImageData(int index, AbstractSimvol simvol)
         {
             SQLiteDataReader reader = execRead("SELECT * FROM ImageDB WHERE id = " + index);
+            int x = 0;
+            x.
             
         }
         /// <summary>
@@ -64,6 +68,24 @@ namespace lab4
             //execWrite()
             return true;            
         }
+
+        public Simvol[] getAllImages()
+        {
+            List<Simvol> simvols = new List<Simvol>();
+            Simvol tmpSimvol;
+            Byte[] bitmapBinary;
+            
+            SQLiteDataReader reader = execRead("SELECT * FROM ImageDB");
+            do
+            {
+                tmpSimvol = (Simvol)factory.CreateSimvol();
+               // GetBy
+               // reader.GetBytes(3,0,bitmapBinary,0,)
+                //tmpSimvol.SetInfo(reader.GetString(1), reader.GetString(2), ByteArrayToBitmap(reader.Get));  
+            } while (reader.NextResult());
+            return null;
+        }
+        #region 
         static byte[] bitmapToByteArray(Bitmap img)
         {
             ImageConverter converter = new ImageConverter();
@@ -74,5 +96,6 @@ namespace lab4
             ImageConverter converter = new ImageConverter();
             return (Bitmap)converter.ConvertTo(imgBinary,typeof(Bitmap));
         }
+        #endregion
     }
 }
