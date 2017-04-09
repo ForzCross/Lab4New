@@ -31,7 +31,7 @@ namespace lab4
                 SQLiteConnection.CreateFile(dbname);
                 connection = new SQLiteConnection(string.Format("Data Source={0};", dbname));
                 connection.Open();
-                execWrite("CREATE DATABASE ImageDB(id INT PRIMARY KEY NOT NULL, "
+                execWrite("CREATE DATABASE IF NOT EXISTS ImageDB(id INT PRIMARY KEY NOT NULL, "
                         + "name TEXT NOT NULL"
                         + "info TEXT NOT NULL"
                         + "image BLOB NOT NULL)");
@@ -39,10 +39,7 @@ namespace lab4
         }
         public void getImageData(int index, AbstractSimvol simvol)
         {
-            SQLiteDataReader reader = execRead("SELECT * FROM ImageDB WHERE id = " + index);
-            int x = 0;
-            x.
-            
+            SQLiteDataReader reader = execRead("SELECT * FROM ImageDB WHERE id = " + index);            
         }
         /// <summary>
         /// Выполняет запрос не ожидая ответа от бд
