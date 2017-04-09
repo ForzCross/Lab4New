@@ -80,6 +80,8 @@ namespace lab4
                // reader.GetBytes(3,0,bitmapBinary,0,)
                 //tmpSimvol.SetInfo(reader.GetString(1), reader.GetString(2), ByteArrayToBitmap(reader.Get));  
             } while (reader.NextResult());
+
+
             return null;
         }
         #region 
