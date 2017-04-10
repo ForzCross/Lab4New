@@ -23,10 +23,9 @@ namespace lab4
         public static string DataBaseConnetionState { get; set; }
         
 
-
-
         protected AppData()
         {
+            //
             //
         }
         public static AppData getInstance()
