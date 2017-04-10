@@ -16,6 +16,9 @@ using Emgu.Util;
 
 namespace lab4
 {
+    /// <summary>
+    /// just useless class
+    /// </summary>
     class Class1
     {
         
