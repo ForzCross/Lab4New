@@ -11,20 +11,16 @@ namespace lab4
     {
     }
 
-
     abstract class TypeOfSimvol
     {
         protected TypeOfSimvol successor;
         public void SetConnect(TypeOfSimvol successor)
         {
             this.successor = successor;
-
         }
-
         public abstract void ConcreteType(Product obj);
 
     }
-
     class ConcreteTypeOfSimvol1 : TypeOfSimvol
     {
 

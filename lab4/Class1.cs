@@ -16,11 +16,6 @@ using Emgu.Util;
 
 namespace lab4
 {
-    enum SimvolType
-    {
-        normal,
-        expert
-    }
     class Class1
     {
 
