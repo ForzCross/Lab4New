@@ -23,24 +23,38 @@ namespace lab4
         /// </summary>
         /// <param name="dbname">имя БД</param>
         public ImageDataBase(string dbname = "ImageDB")
-        {
-           
+        {           
             dbPath = dbname;
             if (!File.Exists(dbname))
             {
                 SQLiteConnection.CreateFile(dbname);
                 connection = new SQLiteConnection(string.Format("Data Source={0};", dbname));
                 connection.Open();
-                execWrite("CREATE DATABASE IF NOT EXISTS ImageDB(id INT PRIMARY KEY NOT NULL, "
+                execWrite("CREATE DATABASE IF NOT EXISTS ImageDB(id INT PRIMARY KEY autoincrement, "
                         + "name TEXT NOT NULL"
-                        + "info TEXT NOT NULL"
+                        + "info TEXT"
                         + "image BLOB NOT NULL)");
             }            
         }
-        public void getImageData(int index, AbstractSimvol simvol)
+        
+        //доделать
+        public void getProduct(int index)
         {
-            SQLiteDataReader reader = execRead("SELECT * FROM ImageDB WHERE id = " + index);            
+
+            SQLiteDataReader reader = execRead("SELECT * FROM ImageDB WHERE id = " + index);
+            reader["image"];
+            reader.GetBytes(3,0,)
         }
+
+        //доделать
+        public bool storeSimvol(Simvol simvol)
+        {
+            byte[] data = bitmapToByteArray(simvol.bmSym);
+            string sqlquery = "INSERT INTO ImageDB(name, info, image) values(" + simvol.name + "," + simvol.info + ")";
+            execWrite(sqlquery);
+            return true;
+        }
+
         /// <summary>
         /// Выполняет запрос не ожидая ответа от бд
         /// </summary>
@@ -58,13 +72,8 @@ namespace lab4
             return command.ExecuteReader();
         }
         
-        public bool storeImage(Bitmap img)
-        {
-            byte[] data = bitmapToByteArray(img);
-            //string sqlquery = "SELECT * FROM "
-            //execWrite()
-            return true;            
-        }
+       
+
 
         public Simvol[] getAllImages()
         {
@@ -82,7 +91,8 @@ namespace lab4
             } while (reader.NextResult());
             return null;
         }
-        #region 
+        
+        #region bitmapConverters
         static byte[] bitmapToByteArray(Bitmap img)
         {
             ImageConverter converter = new ImageConverter();
