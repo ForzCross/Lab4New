@@ -24,8 +24,10 @@ namespace lab4
         
 
 
+
         protected AppData()
         {
+            //
         }
         public static AppData getInstance()
         {
