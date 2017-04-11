@@ -33,5 +33,10 @@ namespace lab4
                // AppData.image = pictureBox1.Image;
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

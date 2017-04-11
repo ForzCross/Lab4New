@@ -3,7 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Emgu.CV;
+using Emgu.CV.CvEnum;
+using Emgu.CV.OCR;
+using Emgu.CV.Structure;
+using Emgu.CV.Util;
+using Emgu.Util;
 namespace lab4
 {
     class Zepochka
@@ -28,8 +33,10 @@ class ConcreteTypeOfSimvol1 : TypeOfSimvol
 
     public override void ConcreteType(Product obj)
     {
+        //CvInvoke.MatchTemplate(,)
         if(obj.name=="name")
         {
+          
             Console.WriteLine("");
         }
         else if(successor!=null)
