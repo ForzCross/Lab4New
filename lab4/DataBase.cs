@@ -38,12 +38,12 @@ namespace lab4
         }
         
         //доделать
-        public void getProduct(int index)
+        public Product getProduct(int index, )
         {
 
             SQLiteDataReader reader = execRead("SELECT * FROM ImageDB WHERE id = " + index);
-            reader["image"];
-            reader.GetBytes(3,0,)
+            reader.GetBlob(3, false);
+
         }
 
         //доделать

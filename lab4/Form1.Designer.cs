@@ -56,6 +56,7 @@
             // 
             // expertModeButton
             // 
+
             this.expertModeButton.Location = new System.Drawing.Point(176, 92);
             this.expertModeButton.Name = "expertModeButton";
             this.expertModeButton.Size = new System.Drawing.Size(120, 23);
