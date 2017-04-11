@@ -27,6 +27,7 @@ namespace lab4
         {
 
         }
+        public ConcreteFactory() { }
         public override AbstractSimvol CreateSimvol()
         {
             return new Simvol();
@@ -49,7 +50,6 @@ namespace lab4
 
         public abstract Button CreateExpSimvol(Rectangle tmp);
     }
-
     class Simvol : AbstractSimvol
     {
         private Rectangle position_simvol = new Rectangle();
@@ -74,7 +74,6 @@ namespace lab4
             this.info = info;
         }
     }
-
     class ExpSimvol : AbstractExpSimvol
     {
         public string name;
