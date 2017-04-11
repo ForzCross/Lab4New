@@ -23,25 +23,20 @@ namespace lab4
             MessageBox.Show("ЛР №4");
         }
 
-       private void openImage()
+        private void новоеРаспознаваниеToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
             fileDialog.Filter = "жипег|*.jpg|бмп|*.bmp|пенг|*.png";
             if(fileDialog.ShowDialog() == DialogResult.OK)
             {
-                SymbolSearchForm form = new SymbolSearchForm(Bitmap.FromFile(fileDialog.FileName));
-                form.ShowDialog();
+               // pictureBox1.Image = Bitmap.FromFile(fileDialog.FileName);
+               // AppData.image = pictureBox1.Image;
             }
         }
 
-        private void userModeButton_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            openImage();
-        }
 
-        private void expertModeButton_Click(object sender, EventArgs e)
-        {
-            openImage();
         }
     }
 }

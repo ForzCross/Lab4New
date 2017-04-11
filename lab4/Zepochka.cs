@@ -28,18 +28,18 @@ abstract class TypeOfSimvol
     public abstract void ConcreteType(Product obj);
 
 }
+
 class ConcreteTypeOfSimvol1 : TypeOfSimvol
 {
 
     public override void ConcreteType(Product obj)
     {
-        //CvInvoke.MatchTemplate(,)
-        if(obj.name=="name")
+        if (obj.name == "name")
         {
           
             Console.WriteLine("");
         }
-        else if(successor!=null)
+        else if (successor != null)
         {
             successor.ConcreteType(obj);
         }
@@ -50,11 +50,11 @@ class ConcreteTypeOfSimvol2 : TypeOfSimvol
 
     public override void ConcreteType(Product obj)
     {
-        if(obj.name=="name2")
+        if (obj.name == "name2")
         {
             Console.WriteLine("");
         }
-        else if(successor!=null)
+        else if (successor != null)
         {
             successor.ConcreteType(obj);
         }
@@ -65,65 +65,69 @@ class ConcreteTypeOfSimvo3 : TypeOfSimvol
 
     public override void ConcreteType(Product obj)
     {
-        if(obj.name=="name3")
+        if (obj.name == "name3")
         {
             Console.WriteLine("");
         }
-        else if(successor!=null)
+        else if (successor != null)
         {
             successor.ConcreteType(obj);
         }
     }
 }
-//////////////////////////////////////////////////////////
-//factorymethod for (exrsimvol and simvol) = product
+/// <summary>
+/// factorymethod for (exrsimvol and simvol) = product
+/// к фабричному методу необходимо в теле мейна  добавить условие в 
+/// каком режиме мы находимся эксперт или обычный человек, код слегка избыточен,
+/// но это плюс к паттерну так что сойдет.
+/// </summary>
 abstract class Product
 {
-   public string name;
+    public string name;
 
 }
-class ProductOutSimvol:Product
+class ProductOutSimvol : Product
 {
-    
-    public ProductOutSimvol(Simvol obj):base()
+
+    public ProductOutSimvol(Simvol obj) : base()
     {
-        this.name=obj.info_simvol[0];
+        this.name = obj.name;
     }
 }
-class ProductoutExpSimvol:Product
+
+class ProductoutExpSimvol : Product
 {
-    public ProductoutExpSimvol(ExpSimvol obj):base()
+    public ProductoutExpSimvol(ExpSimvol obj) : base()
     {
-        this.name=obj.info_simvol[0];
+        this.name = obj.name;
     }
 }
-    abstract class Creator
- {
+abstract class Creator
+{
     public abstract Product FactoryMethod();
-    }
-    class CreateProductOutSimvol:Creator
+}
+class CreateProductOutSimvol : Creator
+{
+    Simvol ob = new Simvol();
+    public CreateProductOutSimvol(Simvol ob)
     {
-        Simvol ob=new Simvol();
-        public CreateProductOutSimvol(Simvol ob)
-        {
-            this.ob=ob;
-        }
+        this.ob = ob;
+    }
     public override Product FactoryMethod()
     {
- 	return new ProductOutSimvol(ob);
+        return new ProductOutSimvol(ob);
     }
-  }
-class CreateProductOutExpSimvol:Creator
+}
+class CreateProductOutExpSimvol : Creator
 {
-   ExpSimvol ob=new ExpSimvol();
-        public CreateProductOutExpSimvol(ExpSimvol ob)
-        {
-            this.ob=ob;
-        }
+    ExpSimvol ob = new ExpSimvol();
+    public CreateProductOutExpSimvol(ExpSimvol ob)
+    {
+        this.ob = ob;
+    }
     public override Product FactoryMethod()
-{
- 	return new ProductoutExpSimvol(ob);
+    {
+        return new ProductoutExpSimvol(ob);
+    }
 }
-}
-//к фабричному методу необходимо в теле мейна  добавить условие в каком режиме мы находимся эксперт или обычный человек, код слегка избыточен, но это плюс к паттерну так что сойдет.
 
