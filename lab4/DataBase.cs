@@ -36,14 +36,21 @@ namespace lab4
                         + "image BLOB NOT NULL)");
             }            
         }
-        
-        //доделать
-        public Product getProduct(int index, )
+        /// <summary>
+        /// Возвращает готовый объект Product из Bd
+        /// </summary>
+        /// <param name="index">Номер продукта</param>
+        /// <param name="pType">Тип возвращаемого продукта</param>
+        /// <returns></returns>
+        public Product getProduct(int index, bool expert = false)
         {
+            if(expert)
+            {
 
+            }
             SQLiteDataReader reader = execRead("SELECT * FROM ImageDB WHERE id = " + index);
             reader.GetBlob(3, false);
-
+            return null;
         }
 
         //доделать

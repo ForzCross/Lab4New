@@ -16,14 +16,6 @@ using Emgu.Util;
 
 namespace lab4
 {
-    /// <summary>
-    /// just useless class
-    /// </summary>
-    class Class1
-    {
-
-    }
-
     abstract class AbstractFactory
     {
         public abstract AbstractSimvol CreateSimvol();
@@ -31,6 +23,10 @@ namespace lab4
     }
     class ConcreteFactory : AbstractFactory
     {
+        public ConcreteFactory(Product product)
+        {
+
+        }
         public override AbstractSimvol CreateSimvol()
         {
             return new Simvol();
@@ -53,7 +49,6 @@ namespace lab4
 
         public abstract Button CreateExpSimvol(Rectangle tmp);
     }
-
 
     class Simvol : AbstractSimvol
     {
@@ -91,8 +86,6 @@ namespace lab4
         /// вернет кнопку с инфой которую на форме уже надо будет сделать прозрачной и сделать привязку к родительской форме
         /// </summary>
         /// <param name="tmp"></param>
-        /// <param name="name"></param>
-        /// <param name="info"></param>
         /// <returns></returns>
         public override Button CreateExpSimvol(Rectangle tmp)
         {
