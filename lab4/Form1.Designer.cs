@@ -42,24 +42,23 @@
             this.справкаToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 1, 0, 1);
-            this.menuStrip1.Size = new System.Drawing.Size(617, 26);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 1, 0, 1);
+            this.menuStrip1.Size = new System.Drawing.Size(463, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // справкаToolStripMenuItem
             // 
             this.справкаToolStripMenuItem.Name = "справкаToolStripMenuItem";
-            this.справкаToolStripMenuItem.Size = new System.Drawing.Size(79, 24);
+            this.справкаToolStripMenuItem.Size = new System.Drawing.Size(65, 22);
             this.справкаToolStripMenuItem.Text = "Справка";
             this.справкаToolStripMenuItem.Click += new System.EventHandler(this.справкаToolStripMenuItem_Click);
             // 
             // expertModeButton
             // 
-            this.expertModeButton.Location = new System.Drawing.Point(235, 112);
-            this.expertModeButton.Margin = new System.Windows.Forms.Padding(4);
+            this.expertModeButton.Location = new System.Drawing.Point(176, 92);
             this.expertModeButton.Name = "expertModeButton";
-            this.expertModeButton.Size = new System.Drawing.Size(160, 28);
+            this.expertModeButton.Size = new System.Drawing.Size(120, 23);
             this.expertModeButton.TabIndex = 1;
             this.expertModeButton.Text = "Экспертный режим";
             this.expertModeButton.UseVisualStyleBackColor = true;
@@ -67,10 +66,9 @@
             // 
             // userModeButton
             // 
-            this.userModeButton.Location = new System.Drawing.Point(235, 190);
-            this.userModeButton.Margin = new System.Windows.Forms.Padding(4);
+            this.userModeButton.Location = new System.Drawing.Point(176, 154);
             this.userModeButton.Name = "userModeButton";
-            this.userModeButton.Size = new System.Drawing.Size(160, 53);
+            this.userModeButton.Size = new System.Drawing.Size(120, 43);
             this.userModeButton.TabIndex = 2;
             this.userModeButton.Text = "Пользовательский режим";
             this.userModeButton.UseVisualStyleBackColor = true;
@@ -78,14 +76,13 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(617, 349);
+            this.ClientSize = new System.Drawing.Size(463, 284);
             this.Controls.Add(this.userModeButton);
             this.Controls.Add(this.expertModeButton);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Распознавание символов";
             this.menuStrip1.ResumeLayout(false);
