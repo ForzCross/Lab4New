@@ -36,6 +36,8 @@ namespace lab4
 
             try
             {
+                
+               
                 //нахождение контура шаблона
                 Mat hierarhy = new Mat();
                 Mat img_template = new Mat();
@@ -44,7 +46,6 @@ namespace lab4
                 VectorOfVectorOfPoint newcontours = new VectorOfVectorOfPoint();
                 // Bitmap im = new Bitmap("C:\\Users\\Marina\\Desktop\\diplomvlop\\22.jpg");
                 Mat image = new Mat("C:\\Users\\Marina\\Desktop\\diplomvlop\\22.jpg", Emgu.CV.CvEnum.LoadImageType.Grayscale);
-
                 CvInvoke.GaussianBlur(image, img_template, new Size(7, 7), 2);
                 CvInvoke.Canny(img_template, img_template, 90, 120, 3, true);
                 CvInvoke.Threshold(img_template, img_template, 127, 256, ThresholdType.Binary);
