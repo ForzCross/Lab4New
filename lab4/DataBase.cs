@@ -17,7 +17,8 @@ namespace lab4
     {
         string dbPath;        
         SQLiteConnection connection;
-        ConcreteFactory factory = new ConcreteFactory();
+        //ConcreteFactory factory = new ConcreteFactory();
+
         /// <summary>
         /// Создаёт подключение к БД
         /// </summary>

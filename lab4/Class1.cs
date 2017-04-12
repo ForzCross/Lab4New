@@ -21,11 +21,15 @@ namespace lab4
         public abstract AbstractSimvol CreateSimvol();
         public abstract AbstractExpSimvol CreateExpSimvol();
     }
+    /// <summary>
+    /// Фабрика, создаёт из продукта символы
+    /// </summary>
     class ConcreteFactory : AbstractFactory
     {
+        Product baseProduct;
         public ConcreteFactory(Product product)
         {
-
+            baseProduct = product;
         }
         public ConcreteFactory() { }
         public override AbstractSimvol CreateSimvol()
