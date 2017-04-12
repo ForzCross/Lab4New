@@ -11,7 +11,7 @@ using System.Collections;
 namespace lab4
 {
     /// <summary>
-    /// Класс для работы с базой данных картинок
+    /// Класс для работы с базой данных картинок [требуется тестирование]
     /// </summary>
     class ImageDataBase
     {
