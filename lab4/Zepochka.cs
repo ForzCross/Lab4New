@@ -16,65 +16,59 @@ namespace lab4
     }
 }
 
-abstract class TypeOfSimvol
+abstract class FindAndResult
 {
-    protected TypeOfSimvol successor;
-    public void SetConnect(TypeOfSimvol successor)
+    protected FindAndResult successor;
+    public void SetConnect(FindAndResult successor)
     {
         this.successor = successor;
 
     }
 
-    public abstract void ConcreteType(Product obj);
+    public abstract int FindSimbol(double res);//будем делать ифы по результат поиска рапознавания.
 
 }
 
-class ConcreteTypeOfSimvol1 : TypeOfSimvol
+class ConcreteTypeOfSimvol1 : FindAndResult
 {
 
-    public override void ConcreteType(Product obj)
+    public override int FindSimbol(double res)
     {
-        if (obj.name == "name")
+        if (res<0.05)
         {
           
-            Console.WriteLine("");
+            Console.WriteLine("Я что то распознал");
+            return 1;
+
         }
         else if (successor != null)
         {
-            successor.ConcreteType(obj);
+            successor.FindSimbol(res);
+            return 0;
         }
+        return -1;
+          
     }
 }
-class ConcreteTypeOfSimvol2 : TypeOfSimvol
+class ConcreteTypeOfSimvol2 : FindAndResult
 {
 
-    public override void ConcreteType(Product obj)
+    public override int FindSimbol(double res)
     {
-        if (obj.name == "name2")
+        if (res>=0.05)
         {
-            Console.WriteLine("");
+            Console.WriteLine("Я ничего не распознал");
+            return 2;
         }
         else if (successor != null)
         {
-            successor.ConcreteType(obj);
+            successor.FindSimbol(res);
+            return 0;
         }
+        return -1;
     }
 }
-class ConcreteTypeOfSimvo3 : TypeOfSimvol
-{
 
-    public override void ConcreteType(Product obj)
-    {
-        if (obj.name == "name3")
-        {
-            Console.WriteLine("");
-        }
-        else if (successor != null)
-        {
-            successor.ConcreteType(obj);
-        }
-    }
-}
 /// <summary>
 /// factorymethod for (exrsimvol and simvol) = product
 /// к фабричному методу необходимо в теле мейна  добавить условие в 
