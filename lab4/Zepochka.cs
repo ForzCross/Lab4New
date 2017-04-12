@@ -129,6 +129,7 @@ namespace lab4
         {
             return factory.CreateSimvol();
         }
+
     }
     class CreateExpSimvolOutProduct : Creator
     {
