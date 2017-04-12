@@ -19,23 +19,21 @@ namespace lab4
     public partial class SymbolSearchForm : Form
     {
         string FileName;
-        public SymbolSearchForm(Image img,string filename)
-        {            
+        Image currentImage;
+        public SymbolSearchForm(Image img/*,string filename*/)
+        {    
             InitializeComponent();
-            pictureBox1.Image = img;
-            FileName = filename;          
+            pictureBox1.Image = img;            
+            //FileName = filename;          
         }
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-
             FindAndResult obj1 = new ResultFoundHandler();
             FindAndResult obj2 = new ResultNotFoundHandler();
             obj1.SetConnect(obj2);
             try
             {
-                
-               
                 //нахождение контура шаблона
                 Mat hierarhy = new Mat();
                 Mat img_template = new Mat();
@@ -65,7 +63,8 @@ namespace lab4
                 int find_cntr = -2;
                 //нахождение контура изображения с опенфайладиалога
 
-                Mat image2 = new Mat(FileName, Emgu.CV.CvEnum.LoadImageType.Grayscale);
+                Image<Rgb, Byte> tempImage = new Image<Rgb, byte>(new Bitmap(currentImage));
+                Mat image2 = tempImage.Mat;//new Mat(FileName, Emgu.CV.CvEnum.LoadImageType.Grayscale);
                 Mat img_real = new Mat();
                 CvInvoke.GaussianBlur(image2, img_real, new Size(7, 7), 2);
                 CvInvoke.Canny(img_real, img_real, 90, 120, 3, true);

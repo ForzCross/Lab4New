@@ -13,6 +13,7 @@ namespace lab4
 {
     public partial class Form1 : Form
     {
+        Facade facade;
         public Form1()
         {
             InitializeComponent();
@@ -23,25 +24,14 @@ namespace lab4
             MessageBox.Show("ЛР №4");
         }
 
-       private void openImage()
-        {
-            OpenFileDialog fileDialog = new OpenFileDialog();
-            fileDialog.Filter = "жипег|*.jpg|бмп|*.bmp|пенг|*.png";
-            if(fileDialog.ShowDialog() == DialogResult.OK)
-            {
-                SymbolSearchForm form = new SymbolSearchForm(Bitmap.FromFile(fileDialog.FileName),fileDialog.FileName);
-                form.ShowDialog();
-            }
-        }
-
         private void userModeButton_Click(object sender, EventArgs e)
         {
-            openImage();
+            facade.createUserWindow();
         }
 
         private void expertModeButton_Click(object sender, EventArgs e)
         {
-            openImage();
+            facade.createExpertWindow();
         }
     }
 }

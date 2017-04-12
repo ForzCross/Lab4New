@@ -12,10 +12,11 @@ namespace lab4
     /// <summary>
     /// Собирает внутри себя все подсистемы и организует их работу
     /// </summary>
-    class Facade
+    public class Facade
     {
         public void createUserWindow()
         {
+            Image img = openImage();
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.ShowDialog();
             //new SymbolSearchForm()
@@ -23,10 +24,11 @@ namespace lab4
 
         public void createExpertWindow()
         {
-            SymbolSearchForm form = new SymbolSearchForm(Bitmap.FromFile(fileDialog.FileName), fileDialog.FileName);
+            Image img = openImage();
+            SymbolSearchForm form = new SymbolSearchForm(img/*Bitmap.FromFile(fileDialog.FileName), fileDialog.FileName*/);
             form.ShowDialog();
         }
-        private Bitmap openImage()
+        private Image openImage()
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
             fileDialog.Filter = "жипег|*.jpg|бмп|*.bmp|пенг|*.png";
