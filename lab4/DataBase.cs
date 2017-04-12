@@ -30,7 +30,7 @@ namespace lab4
                 SQLiteConnection.CreateFile(dbname);
                 connection = new SQLiteConnection(string.Format("Data Source={0};", dbname));
                 connection.Open();
-                execWrite("CREATE DATABASE IF NOT EXISTS ImageDB(id INT PRIMARY KEY autoincrement, "
+                execWrite("CREATE TABLE IF NOT EXISTS ImageDB(id INT PRIMARY KEY autoincrement, "
                         + "name TEXT NOT NULL"
                         + "info TEXT"
                         + "image BLOB NOT NULL)");

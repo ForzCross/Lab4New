@@ -19,13 +19,13 @@ namespace lab4
             Image img = openImage();
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.ShowDialog();
-            //new SymbolSearchForm()
         }
 
         public void createExpertWindow()
         {
             Image img = openImage();
-            SymbolSearchForm form = new SymbolSearchForm(img/*Bitmap.FromFile(fileDialog.FileName), fileDialog.FileName*/);
+            Bitmap bmp = new Bitmap(img);
+            SymbolSearchForm form = new SymbolSearchForm(img);
             form.ShowDialog();
         }
         private Image openImage()

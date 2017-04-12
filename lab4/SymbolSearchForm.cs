@@ -23,14 +23,15 @@ namespace lab4
 
         string FileName;
         Image currentImage;
+        Rectangle cropBorders = new Rectangle();
+        bool cropChanging = false;
         public SymbolSearchForm(Image img/*,string filename*/)
         {    
             InitializeComponent();
             pictureBox1.Image = img;            
             //FileName = filename;          
         }
-
-        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        private void initImage()
         {
             FindAndResult obj1 = new ResultFoundHandler();
             FindAndResult obj2 = new ResultNotFoundHandler();
@@ -75,29 +76,32 @@ namespace lab4
                 //поиск контура по шаблону сравнивая их эквализационные моменты:)
 
                 Image<Bgr, Byte> imag1 = new Image<Bgr, byte>(image2.Bitmap);
-                for (int i = 0; i < newcontours.Size; i++)
+
+                for (int t = 0; t < contours_real_img.Size; t++)
                 {
-                    for (int t = 0; t < contours_real_img.Size; t++)
+                    res = CvInvoke.MatchShapes(newcontours[0], contours_real_img[t], ContoursMatchType.I1);
+                    find_cntr = obj1.FindSimbol(res);
+                    if (find_cntr == 1)
                     {
-                        res = CvInvoke.MatchShapes(newcontours[0], contours_real_img[t], ContoursMatchType.I1);
-                        find_cntr = obj1.FindSimbol(res);
-                        if (find_cntr == 1)
-                        {
-                            CvInvoke.DrawContours(imag1, contours_real_img, t, new MCvScalar(0, 0, 255));
+                        CvInvoke.DrawContours(imag1, contours_real_img, t, new MCvScalar(0, 0, 255));
 
-
-                        }
                     }
                 }
 
+
                 pictureBox1.Image = imag1.Bitmap;
             }
-               
-        
+
+
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "ашипка");
             }
+        }
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+            if(cropChanging)
+                e.Graphics.DrawRectangle(Pens.Black, cropBorders);
         }
 
         private void NonCVButton_Click(object sender, EventArgs e)
@@ -107,5 +111,26 @@ namespace lab4
 
             }
         }
+
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            cropChanging = true;
+            cropBorders.Location = e.Location;
+        }
+         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if(cropChanging)
+            {
+                //cropBorders = new Rectangle(,)
+            }
+        }
+        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
+        {
+            cropChanging = false;
+            cropBorders.Size = new Size(e.Location);
+
+        }
+
+       
     }
 }
