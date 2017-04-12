@@ -34,6 +34,8 @@ namespace lab4
             obj1.SetConnect(obj2);
             try
             {
+                
+               
                 //нахождение контура шаблона
                 Mat hierarhy = new Mat();
                 Mat img_template = new Mat();
@@ -41,8 +43,7 @@ namespace lab4
                 VectorOfVectorOfPoint contours_real_img = new VectorOfVectorOfPoint();
                 VectorOfVectorOfPoint newcontours = new VectorOfVectorOfPoint();
                 // Bitmap im = new Bitmap("C:\\Users\\Marina\\Desktop\\diplomvlop\\22.jpg");
-                Mat image = new Mat("C:\\Users\\Marina\\Desktop\\diplomvlop\\22.jpg", Emgu.CV.CvEnum.LoadImageType.Grayscale);
-
+                Mat image = new Mat("C:\\Users\\Marina\\Desktop\\diplomvlop\\ttw.jpg", Emgu.CV.CvEnum.LoadImageType.Grayscale);
                 CvInvoke.GaussianBlur(image, img_template, new Size(7, 7), 2);
                 CvInvoke.Canny(img_template, img_template, 90, 120, 3, true);
                 CvInvoke.Threshold(img_template, img_template, 127, 256, ThresholdType.Binary);
@@ -76,7 +77,7 @@ namespace lab4
                 {
                     for (int t = 0; t < contours_real_img.Size; t++)
                     {
-                        res = CvInvoke.MatchShapes(newcontours[i], contours_real_img[t], ContoursMatchType.I1);
+                        res = CvInvoke.MatchShapes(newcontours[0], contours_real_img[t], ContoursMatchType.I1);
                         find_cntr = obj1.FindSimbol(res);
                         if (find_cntr == 1)
                         {
