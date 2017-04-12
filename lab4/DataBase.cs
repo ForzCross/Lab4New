@@ -15,6 +15,7 @@ namespace lab4
     /// </summary>
     class ImageDataBase
     {
+
         string dbPath;        
         SQLiteConnection connection;
         /// <summary>
