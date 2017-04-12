@@ -8,5 +8,14 @@ namespace lab4
 {
     class SimvolPool
     {
+        //ListSimvol[] availableSimvols;
+        //public SimvolPool(int size)
+        //{
+        //    availasimvols = new Simvol[size];
+        //}
+        //public Simvol createSimvol()
+        //{
+
+        //}
     }
 }
