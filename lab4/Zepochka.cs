@@ -84,10 +84,47 @@ namespace lab4
             this.name = name;
             this.info = info;
         }
+           virtual public bool ValidateIsUpper()
+        {
+            if (char.IsUpper(name[0])) return true;
+            else return false;         
+        }
         public Product() { }
     }
 
+
+    abstract class DecoratorProduct : Product
+    {
+        protected Product product;
+
+        public void SetProduct(Product product)
+        {
+            this.product = product;
+        }
+
+        public override bool ValidateIsUpper()
+        {
+            if (product != null)
+            {
+                return product.ValidateIsUpper();
+            }
+            else return false;
+        }
+    }
    
+
+    class DecoratorA : DecoratorProduct
+    {
+        public override bool ValidateIsUpper()
+        {
+            if (base.ValidateIsUpper())
+            {
+                name = base.name + '.';
+            }
+            return true;
+        }
+    }
+
     //[УСТАРЕВШЕЕ]
     //class SimvolOutProduct : Product
     //{
