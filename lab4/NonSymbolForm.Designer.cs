@@ -58,6 +58,7 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.InfoSymbolText);
             this.panel1.Controls.Add(this.NameSymbolText);
+            this.panel1.Enabled = false;
             this.panel1.Location = new System.Drawing.Point(245, 12);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(165, 210);
@@ -67,6 +68,7 @@
             // 
             this.panel2.Controls.Add(this.DoneSelectFromDBButton);
             this.panel2.Controls.Add(this.comboBox1);
+            this.panel2.Enabled = false;
             this.panel2.Location = new System.Drawing.Point(12, 12);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(137, 210);
@@ -80,6 +82,7 @@
             this.AddFromDBButton.TabIndex = 3;
             this.AddFromDBButton.Text = "Выбрать из БД";
             this.AddFromDBButton.UseVisualStyleBackColor = true;
+            this.AddFromDBButton.Click += new System.EventHandler(this.AddFromDBButton_Click);
             // 
             // AddInDBButton
             // 
@@ -89,6 +92,7 @@
             this.AddInDBButton.TabIndex = 4;
             this.AddInDBButton.Text = "Добавить в БД";
             this.AddInDBButton.UseVisualStyleBackColor = true;
+            this.AddInDBButton.Click += new System.EventHandler(this.AddInDBButton_Click);
             // 
             // DoneSelectFromDBButton
             // 
@@ -98,6 +102,7 @@
             this.DoneSelectFromDBButton.TabIndex = 1;
             this.DoneSelectFromDBButton.Text = "Выбрать";
             this.DoneSelectFromDBButton.UseVisualStyleBackColor = true;
+            this.DoneSelectFromDBButton.Click += new System.EventHandler(this.DoneSelectFromDBButton_Click);
             // 
             // NameSymbolText
             // 
@@ -139,6 +144,7 @@
             this.DoneAddInDBButton.TabIndex = 4;
             this.DoneAddInDBButton.Text = "Добавить";
             this.DoneAddInDBButton.UseVisualStyleBackColor = true;
+            this.DoneAddInDBButton.Click += new System.EventHandler(this.DoneAddInDBButton_Click);
             // 
             // NonSymbolForm
             // 

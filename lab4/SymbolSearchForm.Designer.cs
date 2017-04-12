@@ -74,7 +74,6 @@
             this.NonCVButton.TabIndex = 1;
             this.NonCVButton.Text = "Символ не распознан";
             this.NonCVButton.UseVisualStyleBackColor = true;
-            this.NonCVButton.Visible = false;
             this.NonCVButton.Click += new System.EventHandler(this.NonCVButton_Click);
             // 
             // SymbolSearchForm

@@ -18,6 +18,9 @@ namespace lab4
 {
     public partial class SymbolSearchForm : Form
     {
+        NonSymbolForm symbolForm = new NonSymbolForm();
+
+
         string FileName;
         Image currentImage;
         public SymbolSearchForm(Image img/*,string filename*/)
@@ -99,7 +102,10 @@ namespace lab4
 
         private void NonCVButton_Click(object sender, EventArgs e)
         {
+            if (symbolForm.ShowDialog() == DialogResult.OK)
+            {
 
+            }
         }
     }
 }
