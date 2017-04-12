@@ -98,5 +98,10 @@ namespace lab4
                 MessageBox.Show(ex.Message, "ашипка");
             }
         }
+
+        private void NonCVButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
