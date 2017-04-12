@@ -9,6 +9,7 @@ using Emgu.CV.OCR;
 using Emgu.CV.Structure;
 using Emgu.CV.Util;
 using Emgu.Util;
+using System.Drawing;
 namespace lab4
 {
     class Zepochka
@@ -74,16 +75,31 @@ namespace lab4
             }
         }
     }
+
     /// <summary>
     /// factorymethod for (exrsimvol and simvol) = product
     /// к фабричному методу необходимо в теле мейна  добавить условие в 
     /// каком режиме мы находимся эксперт или обычный человек, код слегка избыточен,
     /// но это плюс к паттерну так что сойдет.
     /// </summary>
-    abstract class Product
+    class Product
     {
         public string name;
-
+        public string info;
+        public Bitmap template;
+        /// <summary>
+        /// Создаёт продукт
+        /// </summary>
+        /// <param name="template">шаблон, который требуется найти на изображении</param>
+        /// <param name="name">название шаблона</param>
+        /// <param name="info">описание шаблона</param>
+        public Product(Bitmap template, string name, string info = "")
+        {
+            this.template = template;
+            this.name = name;
+            this.info = info;
+        }
+        public Product() { }
     }
     class ProductOutSimvol : Product
     {
