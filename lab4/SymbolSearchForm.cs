@@ -23,8 +23,7 @@ namespace lab4
         {            
             InitializeComponent();
             pictureBox1.Image = img;
-            FileName = filename;
-          
+            FileName = filename;          
         }
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
@@ -33,7 +32,6 @@ namespace lab4
             FindAndResult obj1 = new ResultFoundHandler();
             FindAndResult obj2 = new ResultNotFoundHandler();
             obj1.SetConnect(obj2);
-
             try
             {
                 //нахождение контура шаблона

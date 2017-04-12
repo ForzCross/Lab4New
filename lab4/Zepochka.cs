@@ -18,7 +18,6 @@ namespace lab4
         public void SetConnect(FindAndResult successor)
         {
             this.successor = successor;
-
         }
         public abstract int FindSimbol(double res);//будем делать ифы по результат поиска рапознавания.
     }
