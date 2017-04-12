@@ -16,25 +16,24 @@ namespace lab4
     class ImageDataBase
     {
 
-        string dbPath;        
+        string dbPath;
         SQLiteConnection connection;
         /// <summary>
         /// Создаёт подключение к БД
         /// </summary>
         /// <param name="dbname">имя БД</param>
         public ImageDataBase(string dbname = "ImageDB")
-        {           
-            dbPath = dbname;
-            if (!File.Exists(dbname))
-            {
-                SQLiteConnection.CreateFile(dbname);
-                connection = new SQLiteConnection(string.Format("Data Source={0};", dbname));
-                connection.Open();
-                execWrite("CREATE TABLE IF NOT EXISTS ImageDB(id INT PRIMARY KEY autoincrement, "
-                        + "name TEXT NOT NULL"
-                        + "info TEXT"
-                        + "image BLOB NOT NULL)");
-            }            
+        {
+            SQLiteConnection.CreateFile(dbname);
+            connection = new SQLiteConnection(string.Format("Data Source={0};", dbname));
+            connection.Open();
+            string query = "CREATE TABLE IF NOT EXISTS ImageDB(id INTEGER PRIMARY KEY autoincrement, "
+                    + "name TEXT NOT NULL, "
+                    + "info TEXT, "
+                    + "image BLOB NOT NULL);";
+            SQLiteCommand command = new SQLiteCommand(query, connection);
+            command.ExecuteNonQuery();
+            
         }
         /// <summary>
         /// Получает один продукт из БД
@@ -54,7 +53,7 @@ namespace lab4
             string name = reader.GetString(1);
             string info = reader.GetString(2);
 
-            return new Product(image,name,info);
+            return new Product(image, name, info);
         }
         /// <summary>
         /// получает все продукты из БД
@@ -99,7 +98,7 @@ namespace lab4
         int execWrite(string query)
         {
             SQLiteCommand command = new SQLiteCommand(query, connection);
-            return command.ExecuteNonQuery();           
+            return command.ExecuteNonQuery();
         }
         /// <summary>
         /// Выполняет запросы на чтение из БД
@@ -121,7 +120,7 @@ namespace lab4
         static Bitmap ByteArrayToBitmap(byte[] imgBinary)
         {
             ImageConverter converter = new ImageConverter();
-            return (Bitmap)converter.ConvertTo(imgBinary,typeof(Bitmap));
+            return (Bitmap)converter.ConvertTo(imgBinary, typeof(Bitmap));
         }
         #endregion
     }
