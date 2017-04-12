@@ -13,7 +13,7 @@ namespace lab4
 {
     public partial class Form1 : Form
     {
-        Facade facade;
+        Facade facade = new Facade();
         public Form1()
         {
             InitializeComponent();
