@@ -19,19 +19,24 @@ namespace lab4
     abstract class AbstractFactory
     {
         public abstract AbstractSimvol CreateSimvol();
-        public abstract AbstractExpSimvol CreateExpSimvol();
+        public abstract AbstractSimvol CreateExpSimvol();
     }
+    /// <summary>
+    /// Фабрика, создаёт из продукта символы
+    /// </summary>
     class ConcreteFactory : AbstractFactory
     {
+        Product baseProduct;
         public ConcreteFactory(Product product)
         {
-
+            baseProduct = product;
         }
+        public ConcreteFactory() { }
         public override AbstractSimvol CreateSimvol()
         {
             return new Simvol();
         }
-        public override AbstractExpSimvol CreateExpSimvol()
+        public override AbstractSimvol CreateExpSimvol()
         {
             return new ExpSimvol();
         }
@@ -42,14 +47,6 @@ namespace lab4
 
         public abstract Button CreateSimvol(Rectangle tmp);
     }
-    abstract class AbstractExpSimvol
-    {
-        public abstract void SetInfo(string name, string info, Bitmap bm);
-        public abstract void updateInfo(string name, string info);
-
-        public abstract Button CreateExpSimvol(Rectangle tmp);
-    }
-
     class Simvol : AbstractSimvol
     {
         private Rectangle position_simvol = new Rectangle();
@@ -74,34 +71,34 @@ namespace lab4
             this.info = info;
         }
     }
-
-    class ExpSimvol : AbstractExpSimvol
+    class ExpSimvol : AbstractSimvol
     {
         public string name;
         public string info;
-        private Bitmap bmSym;
+        private Bitmap template;
         public Rectangle position_simvol = new Rectangle();
 
         /// <summary>
         /// вернет кнопку с инфой которую на форме уже надо будет сделать прозрачной и сделать привязку к родительской форме
         /// </summary>
-        /// <param name="tmp"></param>
+        /// <param name="simvolPosition"></param>
         /// <returns></returns>
-        public override Button CreateExpSimvol(Rectangle tmp)
+        public override Button CreateSimvol(Rectangle simvolPosition)
         {
             Button bt = new Button();
-            position_simvol = tmp;
+            position_simvol = simvolPosition;
 
-            bt.Location = tmp.Location;
+            bt.Location = simvolPosition.Location;
             bt.Text = name + " " + info;
             return bt;
         }
-        public override void SetInfo(string name, string info, Bitmap bm)
+        public override void SetInfo(string name, string info, Bitmap template)
         {
             this.name = name;
             this.info = info;
+            this.template = template;
         }
-        public override void updateInfo(string name, string info)
+        public void updateInfo(string name, string info)
         {
             this.name = name;
             this.info = info;

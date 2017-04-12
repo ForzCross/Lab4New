@@ -29,7 +29,7 @@ namespace lab4
             fileDialog.Filter = "жипег|*.jpg|бмп|*.bmp|пенг|*.png";
             if(fileDialog.ShowDialog() == DialogResult.OK)
             {
-                SymbolSearchForm form = new SymbolSearchForm(Bitmap.FromFile(fileDialog.FileName));
+                SymbolSearchForm form = new SymbolSearchForm(Bitmap.FromFile(fileDialog.FileName),fileDialog.FileName);
                 form.ShowDialog();
             }
         }
