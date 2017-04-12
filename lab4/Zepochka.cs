@@ -3,125 +3,143 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Emgu.CV;
+using Emgu.CV.CvEnum;
+using Emgu.CV.OCR;
+using Emgu.CV.Structure;
+using Emgu.CV.Util;
+using Emgu.Util;
+using System.Drawing;
 namespace lab4
 {
-    class Zepochka
+    abstract class FindAndResult
     {
-    }
-}
+        protected FindAndResult successor;
+        public void SetConnect(FindAndResult successor)
+        {
+            this.successor = successor;
 
-abstract class TypeOfSimvol
-{
-    protected TypeOfSimvol successor;
-    public void SetConnect(TypeOfSimvol successor)
-    {
-        this.successor = successor;
-
+        }
+        public abstract int FindSimbol(double res);//будем делать ифы по результат поиска рапознавания.
     }
 
-    public abstract void ConcreteType(Product obj);
 
-}
-
-class ConcreteTypeOfSimvol1 : TypeOfSimvol
-{
-
-    public override void ConcreteType(Product obj)
+    class ResultFoundHandler : FindAndResult
     {
-        if (obj.name == "name")
+        public override int FindSimbol(double res)
         {
-            Console.WriteLine("");
-        }
-        else if (successor != null)
-        {
-            successor.ConcreteType(obj);
-        }
-    }
-}
-class ConcreteTypeOfSimvol2 : TypeOfSimvol
-{
+            if (res < 0.05)
+            {
 
-    public override void ConcreteType(Product obj)
-    {
-        if (obj.name == "name2")
-        {
-            Console.WriteLine("");
-        }
-        else if (successor != null)
-        {
-            successor.ConcreteType(obj);
+                Console.WriteLine("Я что то распознал");
+                return 1;
+            }
+            else if (successor != null)
+            {
+                successor.FindSimbol(res);
+                return 0;
+            }
+            return -1;
+
         }
     }
-}
-class ConcreteTypeOfSimvo3 : TypeOfSimvol
-{
-
-    public override void ConcreteType(Product obj)
+    class ResultNotFoundHandler : FindAndResult
     {
-        if (obj.name == "name3")
+        public override int FindSimbol(double res)
         {
-            Console.WriteLine("");
+            if (res >= 0.05)
+            {
+                Console.WriteLine("Я ничего не распознал");
+                return 2;
+            }
+            else if (successor != null)
+            {
+                successor.FindSimbol(res);
+                return 0;
+            }
+            return -1;
         }
-        else if (successor != null)
+    }
+
+    /// <summary>
+    /// factorymethod for (exrsimvol and simvol) = product
+    /// к фабричному методу необходимо в теле мейна  добавить условие в 
+    /// каком режиме мы находимся эксперт или обычный человек, код слегка избыточен,
+    /// но это плюс к паттерну так что сойдет.
+    /// </summary>
+    class Product
+    {
+        public string name;
+        public string info;
+        public Bitmap template;
+        /// <summary>
+        /// Создаёт продукт
+        /// </summary>
+        /// <param name="template">шаблон, который требуется найти на изображении</param>
+        /// <param name="name">название шаблона</param>
+        /// <param name="info">описание шаблона</param>
+        public Product(Bitmap template, string name, string info = "")
         {
-            successor.ConcreteType(obj);
+            this.template = template;
+            this.name = name;
+            this.info = info;
+        }
+        public Product() { }
+    }
+
+   
+    //[УСТАРЕВШЕЕ]
+    //class SimvolOutProduct : Product
+    //{
+    //    public SimvolOutProduct(Product obj) : base()
+    //    {
+    //        this.name = obj.name;
+    //        this.info = obj.info;
+    //        this.template = obj.template;
+            
+    //    }
+    //}
+
+    //class ExpSimvolOutProduct : Product
+    //{
+    //    public ExpSimvolOutProduct(Product obj) : base()
+    //    {
+    //        this.name = obj.name;
+    //        this.info = obj.info;
+    //        this.template = obj.template;
+           
+    //    }
+    //}
+    //[/УСТАРЕВШЕЕ]
+
+    abstract class Creator
+    {
+        protected ConcreteFactory factory;
+        public abstract AbstractSimvol FactoryMethod();
+    }
+
+    class SimvolOutProductCreator : Creator
+    {
+
+        public SimvolOutProductCreator(Product product)
+        {
+            factory = new ConcreteFactory(product);
+        }
+        public override AbstractSimvol FactoryMethod()
+        {
+            return factory.CreateSimvol();
+        }
+
+    }
+    class CreateExpSimvolOutProduct : Creator
+    {
+        public CreateExpSimvolOutProduct(Product product)
+        {
+            factory = new ConcreteFactory(product);
+        }
+        public override AbstractSimvol FactoryMethod()
+        {
+            return factory.CreateExpSimvol();
         }
     }
 }
-/// <summary>
-/// factorymethod for (exrsimvol and simvol) = product
-/// к фабричному методу необходимо в теле мейна  добавить условие в 
-/// каком режиме мы находимся эксперт или обычный человек, код слегка избыточен,
-/// но это плюс к паттерну так что сойдет.
-/// </summary>
-abstract class Product
-{
-    public string name;
-
-}
-class ProductOutSimvol : Product
-{
-
-    public ProductOutSimvol(Simvol obj) : base()
-    {
-        this.name = obj.name;
-    }
-}
-
-class ProductoutExpSimvol : Product
-{
-    public ProductoutExpSimvol(ExpSimvol obj) : base()
-    {
-        this.name = obj.name;
-    }
-}
-abstract class Creator
-{
-    public abstract Product FactoryMethod();
-}
-class CreateProductOutSimvol : Creator
-{
-    Simvol ob = new Simvol();
-    public CreateProductOutSimvol(Simvol ob)
-    {
-        this.ob = ob;
-    }
-    public override Product FactoryMethod()
-    {
-        return new ProductOutSimvol(ob);
-    }
-}
-class CreateProductOutExpSimvol : Creator
-{
-    ExpSimvol ob = new ExpSimvol();
-    public CreateProductOutExpSimvol(ExpSimvol ob)
-    {
-        this.ob = ob;
-    }
-    public override Product FactoryMethod()
-    {
-        return new ProductoutExpSimvol(ob);
-    }
-}
-
