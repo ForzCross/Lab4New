@@ -116,6 +116,7 @@ namespace lab4
         {
             return new ProductOutSimvol(ob);
         }
+
     }
     class CreateExpSimvolOutProduct : Creator
     {
