@@ -9,61 +9,62 @@ namespace lab4
     class UndoRedo
     {
     }
-}
-abstract class Command
-{
-    public abstract void Execute();
-    public abstract void UnExecute();
-}
-class Expert//эксперт вносит название и описание символа
-{
-    ExpSimvol simvol = new ExpSimvol();
-    public void CreateData(string name,string info)
-    {
-        simvol.updateInfo(name, info);
-    }
-}
-/// <summary>
-/// реализация отмены и возврата
-/// </summary>
-class ConcreteCreateData : Command
-{
-    Expert expsimvol;
-    string name,info;
 
-    public override void Execute()
+    abstract class Command
     {
-        expsimvol.CreateData(name, info);
+        public abstract void Execute();
+        public abstract void UnExecute();
     }
-    public override void UnExecute()
+    class Expert//эксперт вносит название и описание символа
     {
-        expsimvol.CreateData(name, info);
+        ExpSimvol simvol = new ExpSimvol();
+        public void CreateData(string name, string info)
+        {
+            simvol.updateInfo(name, info);
+        }
     }
-}
-/// <summary>
-/// формирует список комаанд которые были произведены экспертом, в дальнейм для отмены и возврата 
-/// </summary>
-class User
-{
-    private List<Command> commands = new List<Command>();
-    private int current = 0;
-    public void Redo(int levels)
+    /// <summary>
+    /// реализация отмены и возврата
+    /// </summary>
+    class ConcreteCreateData : Command
     {
-        for (int i = 0; i < levels; i++)
-            if (current < commands.Count - 1)
-                commands[current].Execute();
+        Expert expsimvol;
+        string name, info;
+
+        public override void Execute()
+        {
+            expsimvol.CreateData(name, info);
+        }
+        public override void UnExecute()
+        {
+            expsimvol.CreateData(name, info);
+        }
     }
-    public void Undo(int levels)
+    /// <summary>
+    /// формирует список команд которые были произведены экспертом, в дальнейм для отмены и возврата 
+    /// </summary>
+    class User
     {
-        for (int i = 0; i < levels; i++)
-            if (current > 0)
-                commands[--current].UnExecute();
-    }
-    public void execommand()
-    {
-        Command com = new ConcreteCreateData();
-        com.Execute();
-        commands.Add(com);
-        current++;
+        private List<Command> commands = new List<Command>();
+        private int current = 0;
+        public void Redo(int levels)
+        {
+            for (int i = 0; i < levels; i++)
+                if (current < commands.Count - 1)
+                    commands[current].Execute();
+        }
+        public void Undo(int levels)
+        {
+            for (int i = 0; i < levels; i++)
+                if (current > 0)
+                    commands[--current].UnExecute();
+        }
+        public void execommand()
+        {
+            Command com = new ConcreteCreateData();
+            com.Execute();
+            commands.Add(com);
+            current++;
+        }
     }
 }

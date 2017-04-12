@@ -9,119 +9,136 @@ using Emgu.CV.OCR;
 using Emgu.CV.Structure;
 using Emgu.CV.Util;
 using Emgu.Util;
+using System.Drawing;
 namespace lab4
 {
-    class Zepochka
+    abstract class FindAndResult
     {
-    }
-}
-
-abstract class FindAndResult
-{
-    protected FindAndResult successor;
-    public void SetConnect(FindAndResult successor)
-    {
-        this.successor = successor;
-
-    }
-
-    public abstract int FindSimbol(double res);//будем делать ифы по результат поиска рапознавания.
-
-}
-
-class ConcreteTypeOfSimvol1 : FindAndResult
-{
-
-    public override int FindSimbol(double res)
-    {
-        if (res<0.05)
+        protected FindAndResult successor;
+        public void SetConnect(FindAndResult successor)
         {
-          
-            Console.WriteLine("Я что то распознал");
-            return 1;
+            this.successor = successor;
 
         }
-        else if (successor != null)
+        public abstract int FindSimbol(double res);//будем делать ифы по результат поиска рапознавания.
+    }
+
+
+    class ResultFoundHandler : FindAndResult
+    {
+        public override int FindSimbol(double res)
         {
-            successor.FindSimbol(res);
-            return 0;
-        }
-        return -1;
-          
-    }
-}
-class ConcreteTypeOfSimvol2 : FindAndResult
-{
+            if (res < 0.05)
+            {
 
-    public override int FindSimbol(double res)
+                Console.WriteLine("Я что то распознал");
+                return 1;
+            }
+            else if (successor != null)
+            {
+                successor.FindSimbol(res);
+                return 0;
+            }
+            return -1;
+
+        }
+    }
+    class ResultNotFoundHandler : FindAndResult
     {
-        if (res>=0.05)
+        public override int FindSimbol(double res)
         {
-            Console.WriteLine("Я ничего не распознал");
-            return 2;
+            if (res >= 0.05)
+            {
+                Console.WriteLine("Я ничего не распознал");
+                return 2;
+            }
+            else if (successor != null)
+            {
+                successor.FindSimbol(res);
+                return 0;
+            }
+            return -1;
         }
-        else if (successor != null)
+    }
+
+    /// <summary>
+    /// factorymethod for (exrsimvol and simvol) = product
+    /// к фабричному методу необходимо в теле мейна  добавить условие в 
+    /// каком режиме мы находимся эксперт или обычный человек, код слегка избыточен,
+    /// но это плюс к паттерну так что сойдет.
+    /// </summary>
+    class Product
+    {
+        public string name;
+        public string info;
+        public Bitmap template;
+        /// <summary>
+        /// Создаёт продукт
+        /// </summary>
+        /// <param name="template">шаблон, который требуется найти на изображении</param>
+        /// <param name="name">название шаблона</param>
+        /// <param name="info">описание шаблона</param>
+        public Product(Bitmap template, string name, string info = "")
         {
-            successor.FindSimbol(res);
-            return 0;
+            this.template = template;
+            this.name = name;
+            this.info = info;
         }
-        return -1;
+        public Product() { }
     }
-}
 
-/// <summary>
-/// factorymethod for (exrsimvol and simvol) = product
-/// к фабричному методу необходимо в теле мейна  добавить условие в 
-/// каком режиме мы находимся эксперт или обычный человек, код слегка избыточен,
-/// но это плюс к паттерну так что сойдет.
-/// </summary>
-abstract class Product
-{
-    public string name;
+   
+    //[УСТАРЕВШЕЕ]
+    //class SimvolOutProduct : Product
+    //{
+    //    public SimvolOutProduct(Product obj) : base()
+    //    {
+    //        this.name = obj.name;
+    //        this.info = obj.info;
+    //        this.template = obj.template;
+            
+    //    }
+    //}
 
-}
-class ProductOutSimvol : Product
-{
+    //class ExpSimvolOutProduct : Product
+    //{
+    //    public ExpSimvolOutProduct(Product obj) : base()
+    //    {
+    //        this.name = obj.name;
+    //        this.info = obj.info;
+    //        this.template = obj.template;
+           
+    //    }
+    //}
+    //[/УСТАРЕВШЕЕ]
 
-    public ProductOutSimvol(Simvol obj) : base()
+    abstract class Creator
     {
-        this.name = obj.name;
+        protected ConcreteFactory factory;
+        public abstract AbstractSimvol FactoryMethod();
     }
-}
 
-class ProductoutExpSimvol : Product
-{
-    public ProductoutExpSimvol(ExpSimvol obj) : base()
+    class SimvolOutProductCreator : Creator
     {
-        this.name = obj.name;
-    }
-}
-abstract class Creator
-{
-    public abstract Product FactoryMethod();
-}
-class CreateProductOutSimvol : Creator
-{
-    Simvol ob = new Simvol();
-    public CreateProductOutSimvol(Simvol ob)
-    {
-        this.ob = ob;
-    }
-    public override Product FactoryMethod()
-    {
-        return new ProductOutSimvol(ob);
-    }
-}
-class CreateProductOutExpSimvol : Creator
-{
-    ExpSimvol ob = new ExpSimvol();
-    public CreateProductOutExpSimvol(ExpSimvol ob)
-    {
-        this.ob = ob;
-    }
-    public override Product FactoryMethod()
-    {
-        return new ProductoutExpSimvol(ob);
-    }
-}
 
+        public SimvolOutProductCreator(Product product)
+        {
+            factory = new ConcreteFactory(product);
+        }
+        public override AbstractSimvol FactoryMethod()
+        {
+            return factory.CreateSimvol();
+        }
+    }
+    class CreateExpSimvolOutProduct : Creator
+    {
+        public CreateExpSimvolOutProduct(Product product)
+        {
+            factory = new ConcreteFactory(product);
+        }
+        public override AbstractSimvol FactoryMethod()
+        {
+            return factory.CreateExpSimvol();
+        }
+    }
+}

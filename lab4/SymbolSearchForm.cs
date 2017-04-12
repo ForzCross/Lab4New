@@ -30,8 +30,8 @@ namespace lab4
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
 
-            FindAndResult obj1 = new ConcreteTypeOfSimvol1();
-            FindAndResult obj2 = new ConcreteTypeOfSimvol2();
+            FindAndResult obj1 = new ResultFoundHandler();
+            FindAndResult obj2 = new ResultNotFoundHandler();
             obj1.SetConnect(obj2);
 
             try
