@@ -14,24 +14,33 @@ namespace lab4
     /// </summary>
     public class Facade
     {
+        
         public void createUserWindow()
         {
+            AppData.getInstance().isExpert = false;
             Image img = openImage();
-            OpenFileDialog dialog = new OpenFileDialog();
-            dialog.ShowDialog();
-        }
-
-        public void createExpertWindow()
-        {
-            Image img = openImage();
+            if (img == null)
+                return;
             Bitmap bmp = new Bitmap(img);
             SymbolSearchForm form = new SymbolSearchForm(img);
             form.ShowDialog();
         }
+
+        public void createExpertWindow()
+        {
+            AppData.getInstance().isExpert = true;
+            Image img = openImage();
+            if (img == null)
+                return;
+            Bitmap bmp = new Bitmap(img);
+            SymbolSearchForm form = new SymbolSearchForm(img);
+            form.ShowDialog();
+        }
+
         private Image openImage()
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
-            fileDialog.Filter = "жипег|*.jpg|бмп|*.bmp|пенг|*.png";
+            fileDialog.Filter = "любой файл|*.*|жипег|*.jpg|бмп|*.bmp|пенг|*.png";
             if (fileDialog.ShowDialog() == DialogResult.OK)
             {
                 return Bitmap.FromFile(fileDialog.FileName);

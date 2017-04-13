@@ -15,7 +15,6 @@ namespace lab4
     /// </summary>
     class ImageDataBase
     {
-
         string dbPath;
         SQLiteConnection connection;
         /// <summary>
@@ -24,16 +23,14 @@ namespace lab4
         /// <param name="dbname">имя БД</param>
         public ImageDataBase(string dbname = "ImageDB")
         {
-            SQLiteConnection.CreateFile(dbname);
+            if (!File.Exists(dbname))
+                SQLiteConnection.CreateFile(dbname);
             connection = new SQLiteConnection(string.Format("Data Source={0};", dbname));
             connection.Open();
-            string query = "CREATE TABLE IF NOT EXISTS ImageDB(id INTEGER PRIMARY KEY autoincrement, "
+            execWrite("CREATE TABLE IF NOT EXISTS ImageDB(id INTEGER PRIMARY KEY autoincrement, "
                     + "name TEXT NOT NULL, "
                     + "info TEXT, "
-                    + "image BLOB NOT NULL);";
-            SQLiteCommand command = new SQLiteCommand(query, connection);
-            command.ExecuteNonQuery();
-            
+                    + "image BLOB NOT NULL);");
         }
         /// <summary>
         /// Получает один продукт из БД
@@ -62,12 +59,12 @@ namespace lab4
         public Product[] getAllImages()
         {
             List<Product> products = new List<Product>();
-            Byte[] bitmapBinary;
+          
 
             SQLiteDataReader reader = execRead("SELECT * FROM ImageDB");
-            do
+            while (reader.Read())
             {
-                SQLiteBlob blob = reader.GetBlob(3, false);
+                SQLiteBlob blob = reader.GetBlob(3,false);
                 int blobSize = blob.GetCount();
                 Byte[] imageData = new Byte[blobSize];
                 blob.Read(imageData, blobSize, 0);
@@ -75,8 +72,8 @@ namespace lab4
                 string name = reader.GetString(1);
                 string info = reader.GetString(2);
                 products.Add(new Product(image, name, info));
-            } while (reader.NextResult());
-
+            }
+            reader.Close();
             return products.ToArray();
         }
         /// <summary>
@@ -87,8 +84,17 @@ namespace lab4
         public int storeProduct(Product product)
         {
             byte[] data = bitmapToByteArray(product.template);
-            string sqlquery = "INSERT INTO ImageDB(name, info, image) values(" + product.name + "," + product.info + ")";
-            return execWrite(sqlquery);
+            SQLiteCommand cmd = new SQLiteCommand(connection);
+            cmd.CommandText = "INSERT INTO ImageDB(name, info, image) values (@name, @info, @img)";
+            cmd.Prepare();
+            cmd.Parameters.Add("@name", System.Data.DbType.String);
+            cmd.Parameters.Add("@info", System.Data.DbType.String);
+            cmd.Parameters.Add("@img", System.Data.DbType.Binary, data.Length);
+            cmd.Parameters["@name"].Value = product.name;
+            cmd.Parameters["@info"].Value = product.info;
+            cmd.Parameters["@img"].Value = data;
+            cmd.ExecuteNonQuery();
+            return 0;
         }
         /// <summary>
         /// Выполняет запрос не ожидая ответа от бд
@@ -108,7 +114,7 @@ namespace lab4
         SQLiteDataReader execRead(string query)
         {
             SQLiteCommand command = new SQLiteCommand(query, connection);
-            return command.ExecuteReader();
+            return command.ExecuteReader(System.Data.CommandBehavior.KeyInfo);
         }
 
         #region bitmapConverters
@@ -120,7 +126,8 @@ namespace lab4
         static Bitmap ByteArrayToBitmap(byte[] imgBinary)
         {
             ImageConverter converter = new ImageConverter();
-            return (Bitmap)converter.ConvertTo(imgBinary, typeof(Bitmap));
+         
+            return (Bitmap)converter.ConvertFrom(imgBinary);
         }
         #endregion
     }

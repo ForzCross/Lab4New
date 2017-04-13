@@ -33,5 +33,11 @@ namespace lab4
         {
             facade.createExpertWindow();
         }
+
+        private void добавитьСимволыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DatabaseUI form = new DatabaseUI();
+            form.ShowDialog();
+        }
     }
 }

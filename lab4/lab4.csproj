@@ -98,6 +98,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppData.cs" />
+    <Compile Include="DatabaseUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DatabaseUI.Designer.cs">
+      <DependentUpon>DatabaseUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="Factory.cs" />
     <Compile Include="DataBase.cs" />
     <Compile Include="Facade.cs" />
@@ -124,6 +130,9 @@
     </Compile>
     <Compile Include="UndoRedo.cs" />
     <Compile Include="Zepochka.cs" />
+    <EmbeddedResource Include="DatabaseUI.resx">
+      <DependentUpon>DatabaseUI.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

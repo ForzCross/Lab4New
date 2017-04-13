@@ -14,19 +14,20 @@ namespace lab4
     class AppData
     {
         private static AppData instance;
-
+        public ImageDataBase dataBase;
         private static readonly Object syncRoot = new Object();
+        public bool isExpert;
+        public double accuracy = 0.01;
+
         //Данные и состояния
-    
         public static List<Image> listImages { get; set; }
         public static string pathDirection { get; set; }
-        public static string DataBaseConnetionState { get; set; }
-        
+        public static string DataBaseConnetionState { get; set; }        
+
 
         protected AppData()
         {
-            //
-            //
+            dataBase = new ImageDataBase();
         }
         public static AppData getInstance()
         {

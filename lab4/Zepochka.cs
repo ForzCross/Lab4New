@@ -19,17 +19,15 @@ namespace lab4
         {
             this.successor = successor;
         }
-        public abstract int FindSimbol(double res);//будем делать ифы по результат поиска рапознавания.
+        public abstract int FindSimbol(double res);
     }
-
 
     class ResultFoundHandler : FindAndResult
     {
         public override int FindSimbol(double res)
         {
-            if (res < 0.05)
+            if (res < AppData.getInstance().accuracy)
             {
-
                 Console.WriteLine("Я что то распознал");
                 return 1;
             }
@@ -59,7 +57,6 @@ namespace lab4
             return -1;
         }
     }
-
     /// <summary>
     /// factorymethod for (exrsimvol and simvol) = product
     /// к фабричному методу необходимо в теле мейна  добавить условие в 
@@ -124,48 +121,22 @@ namespace lab4
         }
     }
 
-    //[УСТАРЕВШЕЕ]
-    //class SimvolOutProduct : Product
-    //{
-    //    public SimvolOutProduct(Product obj) : base()
-    //    {
-    //        this.name = obj.name;
-    //        this.info = obj.info;
-    //        this.template = obj.template;
-            
-    //    }
-    //}
-
-    //class ExpSimvolOutProduct : Product
-    //{
-    //    public ExpSimvolOutProduct(Product obj) : base()
-    //    {
-    //        this.name = obj.name;
-    //        this.info = obj.info;
-    //        this.template = obj.template;
-           
-    //    }
-    //}
-    //[/УСТАРЕВШЕЕ]
-
     abstract class Creator
     {
         protected ConcreteFactory factory;
-        public abstract AbstractSimvol FactoryMethod();
+        public abstract AbstractSimvol FactoryMethod(Rectangle aa);
     }
 
     class SimvolOutProductCreator : Creator
     {
-
         public SimvolOutProductCreator(Product product)
         {
             factory = new ConcreteFactory(product);
         }
-        public override AbstractSimvol FactoryMethod()
+        public override AbstractSimvol FactoryMethod(Rectangle aa)
         {
-            return factory.CreateSimvol();
+            return factory.CreateSimvol(aa);
         }
-
     }
     class CreateExpSimvolOutProduct : Creator
     {
@@ -173,7 +144,7 @@ namespace lab4
         {
             factory = new ConcreteFactory(product);
         }
-        public override AbstractSimvol FactoryMethod()
+        public override AbstractSimvol FactoryMethod(Rectangle aa)
         {
             return factory.CreateExpSimvol();
         }
